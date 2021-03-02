@@ -49,7 +49,6 @@ namespace GraphQlHelperLib
         private async Task<ExecutionResult> SetParamsAndExecute(ExecutionOptions executionOptions)
         {
             executionOptions.Schema = _schema;
-            executionOptions.SetIsAuthJwt(_isAuthJwt);
             return await _documentExecuter.ExecuteAsync(executionOptions);
         }
     }
