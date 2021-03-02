@@ -22,7 +22,7 @@ namespace ConfigModelLib.Type.Input
             xmlElementCM.SetAttribute("basePath", dct["basePath"] as string);
             var xmlElementLoaders = xmlDocument.CreateElement("Loaders");
 
-            xmlDocument.AddChildren(xmlElementLoaders, dct["loaders"] as List<object>, (item, doc) => LoaderInputType.ToXml(item, doc));
+            xmlDocument.AddChildren(xmlElementLoaders, dct["loaders"] as List<object>, LoaderInputType.ToXml);
             xmlElementCM.AppendChild(xmlElementLoaders);
 
             return xmlElementCM;

@@ -27,7 +27,7 @@ namespace ConfigModelLib.Type.Input
             xmlElementLoader.SetAttribute("type", $"{dct["type"]}");
             xmlElementLoader.SetAttribute("enabled", $"{dct["enabled"]}".ToLower());
 
-            xmlDocument.AddChildren(xmlElementLoader, dct["sources"] as List<object>, (item, doc) => SourceInputType.ToXml(item, doc));
+            xmlDocument.AddChildren(xmlElementLoader, dct["sources"] as List<object>, SourceInputType.ToXml);
 
             return xmlElementLoader;
         }
