@@ -1,0 +1,43 @@
+query Query {
+  configurationManagerQuery {
+    configurationManager(path: "C:\\prj\\GraphQL4Config\\ConfigService") {
+      basePath
+      loaders {
+        name
+        type
+        sources {
+          value
+        }
+      }
+    }
+  }
+}
+
+mutation Mutation {
+  configurationManagerMutation {
+    createConfigurationManager(
+      configurationManagerInput: {
+        basePath: "C:\\prj\\GraphQL4Config\\ConfigService"
+        loaders: [
+          {
+            name: "1st loader"
+            enabled: true
+            assembly: "a"
+            type: "aaaaaa"
+            sources: [{ value: "x1" }, { value: "x2" }]
+          }
+          {
+            name: "2nd loader"
+            enabled: true
+            assembly: "b"
+            type: "bbbbbbbbbbbb"
+            sources: [{ value: "z1" }, { value: "z2" }]
+          }
+        ]
+      }
+    ) {
+      status
+      message
+    }
+  }
+}
