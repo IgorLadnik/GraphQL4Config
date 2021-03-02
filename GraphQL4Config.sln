@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{EFD190B9-B147-46AD-9F1D-01A34F71E562}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQlHelperLib", "Libs\GraphQlHelperLib\GraphQlHelperLib.csproj", "{A488400D-6D2E-4ED3-B4F0-3CF82FEE801B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{CF9696AF-1DE7-4377-805D-7462F184CEF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigService", "ConfigService\ConfigService.csproj", "{0189740B-871B-4E40-A5EB-D1CC8155E6B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigModelLib", "Model\ConfigModelLib\ConfigModelLib.csproj", "{B854ECA2-A34C-470F-A55C-7DF29678049E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A488400D-6D2E-4ED3-B4F0-3CF82FEE801B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A488400D-6D2E-4ED3-B4F0-3CF82FEE801B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A488400D-6D2E-4ED3-B4F0-3CF82FEE801B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A488400D-6D2E-4ED3-B4F0-3CF82FEE801B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0189740B-871B-4E40-A5EB-D1CC8155E6B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0189740B-871B-4E40-A5EB-D1CC8155E6B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0189740B-871B-4E40-A5EB-D1CC8155E6B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0189740B-871B-4E40-A5EB-D1CC8155E6B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B854ECA2-A34C-470F-A55C-7DF29678049E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B854ECA2-A34C-470F-A55C-7DF29678049E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B854ECA2-A34C-470F-A55C-7DF29678049E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B854ECA2-A34C-470F-A55C-7DF29678049E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A488400D-6D2E-4ED3-B4F0-3CF82FEE801B} = {EFD190B9-B147-46AD-9F1D-01A34F71E562}
+		{B854ECA2-A34C-470F-A55C-7DF29678049E} = {CF9696AF-1DE7-4377-805D-7462F184CEF5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {687B0ACB-EF81-42A9-8085-CAA6C987AD44}
+	EndGlobalSection
+EndGlobal

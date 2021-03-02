@@ -1,0 +1,12 @@
+<ConfigurationManager basePath="C:\PS\Config">
+	<Loaders>
+		<Loader name="Customer xml loader" assembly="PS.Core.Impl" type="PS.Core.Impl.Config.CustomerValueXmmlConfigLoader" enabled="true">
+			<Source Value="a1" />
+			<Source Value="a2" />
+		</Loader>
+		<Loader name="Default file loader" assembly="PS.Core.Impl" type="PS.Core.Impl.Config.FileConfigLoader" enabled="true">
+			<Source Value="b1" />
+			<Source Value="b2" />
+		</Loader>
+	</Loaders>
+</ConfigurationManager>
