@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using GraphQL.Types;
+using GraphQlHelperLib;
 
 namespace ConfigModelLib.Type.Input
 {
@@ -21,11 +22,7 @@ namespace ConfigModelLib.Type.Input
             xmlElementCM.SetAttribute("basePath", dct["basePath"] as string);
             var xmlElementLoaders = xmlDocument.CreateElement("Loaders");
 
-            var basePath = dct["basePath"];
-            var loaders = dct["loaders"];
-            foreach (Dictionary<string, object> loader in dct["loaders"] as List<object>) 
-                xmlElementLoaders.AppendChild(LoaderInputType.ToXml(loader, xmlDocument));
-
+            xmlDocument.AddChildren(xmlElementLoaders, dct["loaders"] as List<object>, (item, doc) => LoaderInputType.ToXml(item, doc));
             xmlElementCM.AppendChild(xmlElementLoaders);
 
             return xmlElementCM;

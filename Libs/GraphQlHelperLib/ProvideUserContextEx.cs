@@ -55,7 +55,7 @@ namespace GraphQlHelperLib
 
         #endregion // Cache
 
-        #region // Xml 
+        #region Xml 
 
         public static XmlDocument GetXmlDocument(this IProvideUserContext context)
         {
@@ -115,6 +115,15 @@ namespace GraphQlHelperLib
         public static void SetIsAuthJwt(this IProvideUserContext context, bool isAuthJwt)
         {
             GetCacheDictionary(context)["_IsAuthJwt"] = isAuthJwt;
+        }
+
+        public static void AddChildren(this XmlDocument xmlDocument,
+                                       XmlElement parent,
+                                       List<object> lst, 
+                                       Func<Dictionary<string, object>, XmlDocument, XmlElement> toXml) 
+        {
+            foreach (Dictionary<string, object> item in lst)
+                parent.AppendChild(toXml(item, xmlDocument));
         }
     }
 }

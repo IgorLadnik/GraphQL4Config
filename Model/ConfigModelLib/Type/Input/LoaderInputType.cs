@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using GraphQL.Types;
+using GraphQlHelperLib;
 
 namespace ConfigModelLib.Type.Input
 {
@@ -20,15 +21,15 @@ namespace ConfigModelLib.Type.Input
             if (xmlDocument == null)
                 xmlDocument = new();
 
-            var xmlElement = xmlDocument.CreateElement("Loader");
-            xmlElement.SetAttribute("name", $"{dct["name"]}");
-            xmlElement.SetAttribute("assembly", $"{dct["assembly"]}");
-            xmlElement.SetAttribute("type", $"{dct["type"]}");
-            xmlElement.SetAttribute("enabled", $"{dct["enabled"]}".ToLower());
-            foreach (Dictionary<string, object> source in dct["sources"] as List<object>)
-                xmlElement.AppendChild(SourceInputType.ToXml(source, xmlDocument));
+            var xmlElementLoader = xmlDocument.CreateElement("Loader");
+            xmlElementLoader.SetAttribute("name", $"{dct["name"]}");
+            xmlElementLoader.SetAttribute("assembly", $"{dct["assembly"]}");
+            xmlElementLoader.SetAttribute("type", $"{dct["type"]}");
+            xmlElementLoader.SetAttribute("enabled", $"{dct["enabled"]}".ToLower());
 
-            return xmlElement;
+            xmlDocument.AddChildren(xmlElementLoader, dct["sources"] as List<object>, (item, doc) => SourceInputType.ToXml(item, doc));
+
+            return xmlElementLoader;
         }
     }
 }
