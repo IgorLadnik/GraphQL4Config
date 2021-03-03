@@ -18,32 +18,31 @@ namespace GraphQlService.Controllers
         {
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("cm/{basePath}")]
+        public async Task<IActionResult> Get(string basePath)
         {
+            basePath = basePath.Replace('-', '/');
             var query =
-                @"   
-                {
-                    personByIdQuery {
-                      personById(id: /*id*/) {
-                        surname
-                        relations {
-                          p2 {
-                            surname
-                          }
-                          kind
-                        }
-                        affiliations {
-                          organization {
+                @"query Query {
+                    configurationManagerQuery {
+                      configurationManager(basePath: /*basePath*/) {
+                          basePath
+                          loaders {
                             name
-                          }
-                          role {
-                            name
+                            type
+                            sources {
+                               value
+                            }
                           }
                         }
                       }
                     }
-                }".Replace("/*id*/", $"{id}");
+                  ";
+
+            query = query
+                .Replace("/*basePath*/", $"\"{basePath}\"")
+                .Replace("\r", string.Empty)
+                .Replace("\n", string.Empty);
 
             return await ProcessQuery(query);
         }

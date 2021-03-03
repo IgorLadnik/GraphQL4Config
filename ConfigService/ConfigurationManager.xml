@@ -1,10 +1,10 @@
 <ConfigurationManager basePath="C:\PS\Config">
 	<Loaders>
-		<Loader name="Customer xml loader" assembly="PS.Core.Impl" type="PS.Core.Impl.Config.CustomerValueXmmlConfigLoader" enabled="true">
+		<Loader name="Customer xml loader" assembly="PS.Core.Impl" type="Blabla.Config.CustomerLoader" enabled="true">
 			<Source value="a1" />
 			<Source value="a2" />
 		</Loader>
-		<Loader name="Default file loader" assembly="PS.Core.Impl" type="PS.Core.Impl.Config.FileConfigLoader" enabled="true">
+		<Loader name="Default file loader" assembly="PS.Core.Impl" type="Blabla.Config.FileConfigLoader" enabled="true">
 			<Source value="b1" />
 			<Source value="b2" />
 		</Loader>

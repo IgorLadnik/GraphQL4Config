@@ -19,8 +19,8 @@ namespace ConfigModelLib.Mutation
                     var inp = context.GetArgument<Dictionary<string, object>>("configurationManagerInput");
                     xmlDocument.AppendChild(ConfigurationManagerInputType.ToXml(inp, xmlDocument));
 
-                    var basePath = inp["basePath"];
-                    xmlDocument.Save($@"{inp["basePath"]}\ConfigurationManager.xml");
+                    var basePath = $"{inp["basePath"]}".Replace("/", @"\");
+                    xmlDocument.Save($@"{basePath}\ConfigurationManager.xml");
 
                     return new MutationsResponse
                     {

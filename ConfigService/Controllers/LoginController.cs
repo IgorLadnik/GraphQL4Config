@@ -14,9 +14,9 @@ namespace ConfigService.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PermissionController : Controller
+    public class LoginController : Controller
     {
-        public PermissionController(IConfiguration configuration)
+        public LoginController(IConfiguration configuration)
         {
             
         }

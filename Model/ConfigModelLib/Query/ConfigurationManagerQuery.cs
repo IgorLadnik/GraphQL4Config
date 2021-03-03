@@ -11,11 +11,11 @@ namespace ConfigModelLib.Query
     {
         public ConfigurationManagerQuery() =>
             Field<ConfigurationManagerType>("configurationManager",
-                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "path" }),
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "basePath" }),
                 resolve: context =>
                 {
                     const string defaultFileName = "ConfigurationManager.xml";
-                    var path = context.GetArgument<string>("path");
+                    var path = context.GetArgument<string>("basePath").Replace("/", @"\");
                     if (string.IsNullOrEmpty(path))
                         return "Empty path";
 
