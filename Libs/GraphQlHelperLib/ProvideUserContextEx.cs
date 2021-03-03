@@ -60,13 +60,61 @@ namespace GraphQlHelperLib
 
         #endregion // Xml
 
+        public static XmlElement GetCreateElementy(this XmlDocument xmlDocument, string name, int index)
+        {
+            var elements = xmlDocument.GetElementsByTagName(name);
+            if (elements.Count > 0)
+                return elements[index] as XmlElement;
+
+            return xmlDocument.CreateElement(name);
+        }
+
         public static void AddChildren(this XmlDocument xmlDocument,
                                        XmlElement parent,
-                                       List<object> lst, 
-                                       Func<Dictionary<string, object>, XmlDocument, XmlElement> toXml) 
+                                       Dictionary<string, object> inp,
+                                       string key,
+                                       Func<Dictionary<string, object>, XmlDocument, XmlElement> toXml,
+                                       Func<XmlDocument, XmlElement, XmlElement> filter = null)
         {
-            foreach (Dictionary<string, object> item in lst)
-                parent.AppendChild(toXml(item, xmlDocument));
+            if (!inp.TryGetValue(key, out object value))
+                return;
+
+            foreach (Dictionary<string, object> item in value as List<object>)
+            {
+                var newXmlElement = toXml(item, xmlDocument);
+                var oldXmlElement = filter?.Invoke(xmlDocument, newXmlElement);
+                if (oldXmlElement == null)
+                    parent.AppendChild(newXmlElement);
+                else
+                {
+                    foreach (XmlAttribute newAttr in newXmlElement.Attributes)
+                        oldXmlElement.SetAttribute(newAttr.Name, newAttr.Value);
+                }
+            }
         }
+
+        public static void SetAttr(this XmlElement xmlElement, Dictionary<string, object> inp, string attrName, bool isToLower = false) 
+        {
+            if (!inp.TryGetValue(attrName, out object value))
+                return;
+            
+            var strValue = value?.ToString();
+            if (isToLower)
+                strValue = strValue.ToLower();
+
+            xmlElement.SetAttribute(attrName, strValue);          
+        }
+
+        //public static void SetAttr(this XmlElement xmlElement, Dictionary<string, object> inp, string attrName, bool isToLower = false)
+        //{
+        //    if (inp.TryGetValue(attrName, out object value))
+        //    {
+        //        var strValue = value?.ToString();
+        //        if (isToLower)
+        //            strValue = strValue.ToLower();
+
+        //        xmlElement.SetAttribute(attrName, strValue);
+        //    }
+        //}
     }
 }

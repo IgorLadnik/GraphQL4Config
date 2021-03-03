@@ -4,6 +4,7 @@ using GraphQL.Types;
 using ConfigModelLib.Type.Input;
 using ConfigModelLib.Type.Output;
 using System.Xml;
+using System.IO;
 
 namespace ConfigModelLib.Mutation
 {
@@ -15,12 +16,21 @@ namespace ConfigModelLib.Mutation
                 arguments: new QueryArguments(new QueryArgument<ConfigurationManagerInputType> { Name = "configurationManagerInput" }),
                 resolve: context =>
                 {
-                    XmlDocument xmlDocument = new();
                     var inp = context.GetArgument<Dictionary<string, object>>("configurationManagerInput");
-                    xmlDocument.AppendChild(ConfigurationManagerInputType.ToXml(inp, xmlDocument));
-
                     var basePath = $"{inp["basePath"]}".Replace("/", @"\");
-                    xmlDocument.Save($@"{basePath}\ConfigurationManager.xml");
+                    var file  = $@"{basePath}\ConfigurationManager.xml";
+                    XmlDocument xmlDocument = new();
+                    var isLoaded = false;
+                    if (isLoaded = File.Exists(file))
+                        xmlDocument.Load(file);
+
+                    var firstChild = ConfigurationManagerInputType.ToXml(inp, xmlDocument);
+                    if (isLoaded) 
+                        xmlDocument.RemoveChild(xmlDocument.FirstChild);
+
+                    xmlDocument.AppendChild(firstChild);
+
+                    xmlDocument.Save(file);
 
                     return new MutationsResponse
                     {

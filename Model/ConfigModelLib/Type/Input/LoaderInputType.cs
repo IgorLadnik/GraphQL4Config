@@ -16,18 +16,18 @@ namespace ConfigModelLib.Type.Input
             Field<ListGraphType<SourceInputType>>("Sources");
         }
 
-        public static XmlElement ToXml(Dictionary<string, object> dct, XmlDocument xmlDocument = null)
+        public static XmlElement ToXml(Dictionary<string, object> inp, XmlDocument xmlDocument = null)
         {
             if (xmlDocument == null)
                 xmlDocument = new();
 
             var xmlElementLoader = xmlDocument.CreateElement("Loader");
-            xmlElementLoader.SetAttribute("name", $"{dct["name"]}");
-            xmlElementLoader.SetAttribute("assembly", $"{dct["assembly"]}");
-            xmlElementLoader.SetAttribute("type", $"{dct["type"]}");
-            xmlElementLoader.SetAttribute("enabled", $"{dct["enabled"]}".ToLower());
+            xmlElementLoader.SetAttr(inp, "name");
+            xmlElementLoader.SetAttr(inp, "assembly");
+            xmlElementLoader.SetAttr(inp, "type");
+            xmlElementLoader.SetAttr(inp, "enabled", true);
 
-            xmlDocument.AddChildren(xmlElementLoader, dct["sources"] as List<object>, SourceInputType.ToXml);
+            xmlDocument.AddChildren(xmlElementLoader, inp, "sources", SourceInputType.ToXml);
 
             return xmlElementLoader;
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using GraphQL.Types;
+using GraphQlHelperLib;
 
 namespace ConfigModelLib.Type.Input
 {
@@ -16,7 +17,7 @@ namespace ConfigModelLib.Type.Input
             if (xmlDocument == null)
                 xmlDocument = new();
 
-            var xmlElement = xmlDocument.CreateElement("Source");
+            var xmlElement = xmlDocument.GetCreateElementy("Source", 0);
             xmlElement.SetAttribute("value", $"{dct["value"]}");
 
             return xmlElement;

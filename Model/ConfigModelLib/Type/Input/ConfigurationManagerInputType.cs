@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
+using System.Linq;
 using GraphQL.Types;
 using GraphQlHelperLib;
 
@@ -13,16 +14,24 @@ namespace ConfigModelLib.Type.Input
             Field<ListGraphType<LoaderInputType>>("loaders");
         }
 
-        public static XmlElement ToXml(Dictionary<string, object> dct, XmlDocument xmlDocument = null)
+        public static XmlElement ToXml(Dictionary<string, object> inp, XmlDocument xmlDocument = null)
         {
             if (xmlDocument == null)
                 xmlDocument = new();
-            
-            var xmlElementCM = xmlDocument.CreateElement("ConfigurationManager");
-            xmlElementCM.SetAttribute("basePath", dct["basePath"] as string);
-            var xmlElementLoaders = xmlDocument.CreateElement("Loaders");
 
-            xmlDocument.AddChildren(xmlElementLoaders, dct["loaders"] as List<object>, LoaderInputType.ToXml);
+            var xmlElementCM = xmlDocument.GetCreateElementy("ConfigurationManager", 0);
+            xmlElementCM.SetAttr(inp, "basePath");
+            var xmlElementLoaders = xmlDocument.GetCreateElementy("Loaders", 0);
+
+            xmlDocument.AddChildren(xmlElementLoaders, inp, "loaders", LoaderInputType.ToXml,
+                (xmlDocument, xmlElement) => 
+                {
+                    foreach (XmlElement el in xmlDocument.GetElementsByTagName("Loader")) 
+                        if (el.GetAttribute("name") == xmlElement.GetAttribute("name"))
+                            return el;
+
+                    return null;
+                });
             xmlElementCM.AppendChild(xmlElementLoaders);
 
             return xmlElementCM;
